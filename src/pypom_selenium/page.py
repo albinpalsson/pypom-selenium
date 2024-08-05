@@ -3,12 +3,11 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import collections
+import urllib.parse as urlparse
+from urllib.parse import urlencode
 
 from .exception import UsageError
 from .view import WebView
-
-import urllib.parse as urlparse
-from urllib.parse import urlencode
 
 
 def iterable(arg):
@@ -61,7 +60,7 @@ class Page(WebView):
     """
 
     def __init__(self, driver, base_url=None, timeout=10, **url_kwargs):
-        super(Page, self).__init__(driver, timeout)
+        super().__init__(driver, timeout)
         self.base_url = base_url
         self.url_kwargs = url_kwargs
 
@@ -92,7 +91,7 @@ class Page(WebView):
         for k, v in self.url_kwargs.items():
             if v is None:
                 continue
-            if "{{{}}}".format(k) not in str(self.URL_TEMPLATE):
+            if f"{{{k}}}" not in str(self.URL_TEMPLATE):
                 for i in iterable(v):
                     query.append((k, i))
 

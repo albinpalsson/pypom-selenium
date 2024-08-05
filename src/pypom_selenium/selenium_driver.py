@@ -8,7 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-class Selenium(object):
+class Selenium:
     def __init__(self, driver):
         self.driver = driver
 
@@ -29,7 +29,8 @@ class Selenium(object):
     def find_element(self, strategy, locator, root=None):
         """Finds an element on the page.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        :param strategy: Location strategy to use. See
+        :py:class:`~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target element.
         :param root: (optional) root node.
         :type strategy: str
@@ -46,7 +47,8 @@ class Selenium(object):
     def find_elements(self, strategy, locator, root=None):
         """Finds elements on the page.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        :param strategy: Location strategy to use. See
+        :py:class:`~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target elements.
         :param root: (optional) root node.
         :type strategy: str
@@ -63,7 +65,8 @@ class Selenium(object):
     def is_element_present(self, strategy, locator, root=None):
         """Checks whether an element is present.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        :param strategy: Location strategy to use. See
+        :py:class:`~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target element.
         :param root: (optional) root node.
         :type strategy: str
@@ -81,7 +84,8 @@ class Selenium(object):
     def is_element_displayed(self, strategy, locator, root=None):
         """Checks whether an element is displayed.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        :param strategy: Location strategy to use. See
+        :py:class:`~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target element.
         :param root: (optional) root node.
         :type strategy: str

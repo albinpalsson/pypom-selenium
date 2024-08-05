@@ -12,6 +12,7 @@ mock = "*"
 black = "*"
 twine = "*"
 tox = "*"
+pytest-pylint = "*"
 
 [requires]
 python_version = "3.8"

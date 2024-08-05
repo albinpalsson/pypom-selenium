@@ -2,11 +2,13 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import re
 import random
-
 import pytest
+from selenium.common.exceptions import TimeoutException
 
 from pypom_selenium import Page
+from pypom_selenium.exception import UsageError
 
 
 def test_base_url(base_url, page):
@@ -42,7 +44,7 @@ def test_seed_url_absolute_keywords_params(base_url, driver):
         URL_TEMPLATE = absolute_url
 
     page = MyPage(driver, base_url, key=value)
-    assert "{}?key={}".format(absolute_url, value) == page.seed_url
+    assert f"{absolute_url}?key={value}" == page.seed_url
 
 
 def test_seed_url_absolute_keywords_params_none(base_url, driver):
@@ -64,7 +66,7 @@ def test_seed_url_absolute_keywords_tokens_and_params(base_url, driver):
         URL_TEMPLATE = absolute_url + "?key1={key1}"
 
     page = MyPage(driver, base_url, key1=values[0], key2=values[1])
-    assert "{}?key1={}&key2={}".format(absolute_url, *values) == page.seed_url
+    assert f"{absolute_url}?key1={values[0]}&key2={values[1]}" == page.seed_url
 
 
 def test_seed_url_empty(driver):
@@ -85,30 +87,29 @@ def test_seed_url_keywords_tokens(base_url, driver):
 def test_seed_url_keywords_params(base_url, driver):
     value = str(random.random())
     page = Page(driver, base_url, key=value)
-    assert "{}?key={}".format(base_url, value) == page.seed_url
+    assert f"{base_url}?key={value}" == page.seed_url
 
 
 def test_seed_url_keywords_params_space(base_url, driver):
     value = "a value"
     page = Page(driver, base_url, key=value)
-    assert "{}?key={}".format(base_url, "a+value") == page.seed_url
+    assert f"{base_url}?key=a+value" == page.seed_url
 
 
 def test_seed_url_keywords_params_special(base_url, driver):
     value = "mozilla&co"
     page = Page(driver, base_url, key=value)
-    assert "{}?key={}".format(base_url, "mozilla%26co") == page.seed_url
+    assert f"{base_url}?key=mozilla%26co" == page.seed_url
 
 
 def test_seed_url_keywords_multiple_params(base_url, driver):
     value = ("foo", "bar")
     page = Page(driver, base_url, key=value)
     seed_url = page.seed_url
-    assert "key={}".format(value[0]) in seed_url
-    assert "key={}".format(value[1]) in seed_url
-    import re
+    assert f"key={value[0]}" in seed_url
+    assert f"key={value[1]}" in seed_url
 
-    assert re.match(r"{}\?key=(foo|bar)&key=(foo|bar)".format(base_url), seed_url)
+    assert re.match(rf"{base_url}\?key=(foo|bar)&key=(foo|bar)", seed_url)
 
 
 def test_seed_url_keywords_multiple_params_special(base_url, driver):
@@ -117,10 +118,9 @@ def test_seed_url_keywords_multiple_params_special(base_url, driver):
     seed_url = page.seed_url
     assert "key=foo" in seed_url
     assert "key=mozilla%26co" in seed_url
-    import re
 
     assert re.match(
-        r"{}\?key=(foo|mozilla%26co)&key=(foo|mozilla%26co)".format(base_url), seed_url
+        rf"{base_url}\?key=(foo|mozilla%26co)&key=(foo|mozilla%26co)", seed_url
     )
 
 
@@ -131,7 +131,7 @@ def test_seed_url_keywords_keywords_and_params(base_url, driver):
         URL_TEMPLATE = "?key1={key1}"
 
     page = MyPage(driver, base_url, key1=values[0], key2=values[1])
-    assert "{}?key1={}&key2={}".format(base_url, *values) == page.seed_url
+    assert f"{base_url}?key1={values[0]}&key2={values[1]}" == page.seed_url
 
 
 def test_seed_url_prepend(base_url, driver):
@@ -144,12 +144,11 @@ def test_seed_url_prepend(base_url, driver):
     assert base_url + url_template == page.seed_url
 
 
-def test_open(page, driver):
+def test_open(page):
     assert isinstance(page.open(), Page)
 
 
 def test_open_seed_url_none(driver):
-    from pypom_selenium.exception import UsageError
 
     page = Page(driver)
     with pytest.raises(UsageError):
@@ -162,7 +161,6 @@ def test_open_timeout(base_url, driver):
             self.wait.until(lambda s: False)
 
     page = MyPage(driver, base_url, timeout=0)
-    from selenium.common.exceptions import TimeoutException
 
     with pytest.raises(TimeoutException):
         page.open()
@@ -175,13 +173,12 @@ def test_open_timeout_loaded(base_url, driver):
             return False
 
     page = MyPage(driver, base_url, timeout=0)
-    from selenium.common.exceptions import TimeoutException
 
     with pytest.raises(TimeoutException):
         page.open()
 
 
-def test_wait_for_page(page, driver):
+def test_wait_for_page(page):
     assert isinstance(page.wait_for_page_to_load(), Page)
 
 
@@ -191,7 +188,6 @@ def test_wait_for_page_timeout(base_url, driver):
             self.wait.until(lambda s: False)
 
     page = MyPage(driver, base_url, timeout=0)
-    from selenium.common.exceptions import TimeoutException
 
     with pytest.raises(TimeoutException):
         page.wait_for_page_to_load()
@@ -204,7 +200,6 @@ def test_wait_for_page_timeout_loaded(base_url, driver):
             return False
 
     page = MyPage(driver, base_url, timeout=0)
-    from selenium.common.exceptions import TimeoutException
 
     with pytest.raises(TimeoutException):
         page.wait_for_page_to_load()
@@ -214,5 +209,5 @@ def test_wait_for_page_empty_base_url(driver):
     assert isinstance(Page(driver).wait_for_page_to_load(), Page)
 
 
-def test_loaded(page, driver):
+def test_loaded(page):
     assert page.loaded is True

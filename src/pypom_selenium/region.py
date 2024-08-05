@@ -45,7 +45,7 @@ class Region(WebView):
     _root_locator = None
 
     def __init__(self, page: Page, root=None):
-        super(Region, self).__init__(page.driver, page.timeout)
+        super().__init__(page.driver, page.timeout)
         self._root = root
         self.page = page
         self.wait_for_region_to_load()
@@ -56,12 +56,15 @@ class Region(WebView):
 
         Page regions should define a root element either by passing this on
         instantiation or by defining a :py:attr:`_root_locator` attribute. To
-        reduce the chances of hitting :py:class:`~selenium.common.exceptions.StaleElementReferenceException`
-        or similar you should use :py:attr:`_root_locator`, as this is looked up every
-        time the :py:attr:`root` property is accessed.
+        reduce the chances of hitting
+        :py:class:`~selenium.common.exceptions.StaleElementReferenceException` or similar
+        you should use :py:attr:`_root_locator`, as this is looked up every time the
+        :py:attr:`root` property is accessed.
         """
         if self._root is None and self._root_locator is not None:
-            return self.page.find_element(*self._root_locator)
+            return self.page.find_element(
+                *self._root_locator
+            )  # pylint: disable=not-an-iterable
         return self._root
 
     def wait_for_region_to_load(self):

@@ -5,7 +5,7 @@
 from pypom_selenium.selenium_driver import Selenium
 
 
-class WebView(object):
+class WebView:
     def __init__(self, driver, timeout):
         self.driver = driver
         self.driver_adapter = Selenium(driver)

@@ -5,6 +5,10 @@
 import pytest
 from mock import Mock
 
+from pypom_selenium import Page
+
+# pylint: disable=redefined-outer-name
+
 
 @pytest.fixture
 def base_url():
@@ -20,8 +24,6 @@ def element(driver):
 
 @pytest.fixture
 def page(driver, base_url):
-    from pypom_selenium import Page
-
     return Page(driver, base_url)
 
 

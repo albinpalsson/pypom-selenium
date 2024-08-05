@@ -4,6 +4,7 @@
 
 import pytest
 from mock import Mock
+from selenium.common.exceptions import TimeoutException
 
 from pypom_selenium import Region
 
@@ -18,7 +19,6 @@ class TestWaitForRegion:
                 self.wait.until(lambda s: False)
 
         page.timeout = 0
-        from selenium.common.exceptions import TimeoutException
 
         with pytest.raises(TimeoutException):
             MyRegion(page)
@@ -30,18 +30,15 @@ class TestWaitForRegion:
                 return False
 
         page.timeout = 0
-        from selenium.common.exceptions import TimeoutException
 
         with pytest.raises(TimeoutException):
             MyRegion(page)
 
 
-class TestNoRoot:
-    def test_root(self, page):
-        assert Region(page).root is None
+def test_no_root(page):
+    assert Region(page).root is None
 
 
-class TestRootElement:
-    def test_root(self, page, driver):
-        element = Mock()
-        assert Region(page, root=element).root == element
+def test_root(page):
+    element = Mock()
+    assert Region(page, root=element).root == element
