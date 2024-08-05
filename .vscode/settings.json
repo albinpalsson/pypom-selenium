@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.env.linux": {
+        "PIPENV_CUSTOM_VENV_NAME": "venv",
+        "PIPENV_VENV_IN_PROJECT": "1"
+    },
+    "editor.formatOnSave": true
+}

@@ -1,0 +1,26 @@
+[project]
+name = "pypom-selenium"
+version = "0.0.1"
+authors = [
+  { name="Albin Pålsson" },
+]
+description = "python page object model for selenium"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["pypom", "page", "object", "model", "selenium"]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Operating System :: POSIX",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS :: MacOS X",
+]
+
+[project.urls]
+Homepage = "https://github.com/albinpalsson/pypom-selenium"
+Issues = "https://github.com/albinpalsson/pypom-selenium/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
