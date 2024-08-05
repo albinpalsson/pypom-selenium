@@ -9,3 +9,4 @@ dist/
 # Environments
 venv/
 .venv/
+.tox/

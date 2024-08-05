@@ -302,3 +302,11 @@ The following example waits for an element within a page region to be displayed
 ```
 
 Other things to wait for might include when elements are displayed or enabled, or when an element has a particular class. This will be very dependent on your application.
+
+## Development
+### Running Tests
+You will need Tox installed to run the tests against the supported Python versions.
+```sh
+$ python -m pip install tox
+$ tox
+```

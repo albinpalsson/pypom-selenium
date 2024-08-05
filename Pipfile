@@ -11,6 +11,7 @@ pytest = "*"
 mock = "*"
 black = "*"
 twine = "*"
+tox = "*"
 
 [requires]
 python_version = "3.8"
