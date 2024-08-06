@@ -310,3 +310,7 @@ You will need Tox installed to run the tests against the supported Python versio
 $ python -m pip install tox
 $ tox
 ```
+
+## Release Notes
+### 1.0.0 (2024-08-06)
+First official release.
