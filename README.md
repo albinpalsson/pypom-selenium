@@ -1,6 +1,8 @@
 # Selenium PyPOM
 
-Selenium PyPOM is a Python Page Object Model library for Selenium. It presents a thin interface for implementing the page object model design pattern. This project is built based on https://github.com/mozilla/PyPOM, all credit goes to the authors.
+Selenium PyPOM is a Python Page Object Model library for Selenium. It presents a thin interface for implementing the page object model design pattern. The project is built based on [mozilla/PyPOM](https://github.com/mozilla/PyPOM), all credit goes to the authors.
+
+This project is licensed under the Mozilla Public License version 2.0.
 
 ## Table of Contents
 - [Installation](#installation)
