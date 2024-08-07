@@ -316,3 +316,7 @@ $ tox
 ## Release Notes
 ### 1.0.0 (2024-08-06)
 First official release.
+
+### 1.1.0 (2024-08-06)
+Add support for python 3.10.  
+The project now officially supports versions 3.8, 3.9, 3.11 and 3.12.
