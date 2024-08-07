@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import collections
+import collections.abc
 import urllib.parse as urlparse
 from urllib.parse import urlencode
 
@@ -11,7 +11,7 @@ from .view import WebView
 
 
 def iterable(arg):
-    if isinstance(arg, collections.Iterable) and not isinstance(arg, str):
+    if isinstance(arg, collections.abc.Iterable) and not isinstance(arg, str):
         return arg
     return [arg]
 
