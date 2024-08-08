@@ -1,5 +1,9 @@
-# Selenium PyPOM
+[![PyPI Version](https://img.shields.io/pypi/v/pypom-selenium)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pypom-selenium)
+![PyPI - License](https://img.shields.io/pypi/l/pypom-selenium)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pypom-selenium)](https://pypi.python.org/pypi/pypom-selenium)
 
+# Selenium PyPOM
 Selenium PyPOM is a Python Page Object Model library for Selenium. It presents a thin interface for implementing the page object model design pattern. The project is built based on [mozilla/PyPOM](https://github.com/mozilla/PyPOM), all credit goes to the authors.
 
 This project is licensed under the Mozilla Public License version 2.0.
