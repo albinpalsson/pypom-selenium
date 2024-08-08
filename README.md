@@ -24,8 +24,8 @@ This project is licensed under the Mozilla Public License version 2.0.
         - [Shared regions](#shared-regions)
         - [Waiting for regions to load](#waiting-for-regions-to-load)
     - [Release Notes](#release-notes)
+        - [1.1.0](#110-2024-08-07)
         - [1.0.0](#100-2024-08-06)
-        - [1.1.0](#110-2024-08-06)
 
 
 ## Installation
@@ -321,9 +321,9 @@ $ tox
 ```
 
 ## Release Notes
-### 1.0.0 (2024-08-06)
-First official release.
-
-### 1.1.0 (2024-08-06)
+### 1.1.0 (2024-08-07)
 Add support for python 3.10.  
 The project now officially supports versions 3.8, 3.9, 3.11 and 3.12.
+
+### 1.0.0 (2024-08-06)
+First official release.
