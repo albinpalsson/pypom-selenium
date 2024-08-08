@@ -13,8 +13,8 @@ class Region(WebView):
 
     :param page: Page object this region appears in.
     :param root: (optional) element that serves as the root for the region.
-    :type page: :py:class:`~.page.Page`
-    :type root: :py:class:`~selenium.webdriver.remote.webelement.WebElement`
+    :type page: `~.page.Page`
+    :type root: `~selenium.webdriver.remote.webelement.WebElement`
 
     Usage::
 
@@ -55,11 +55,11 @@ class Region(WebView):
         """Root element for the page region.
 
         Page regions should define a root element either by passing this on
-        instantiation or by defining a :py:attr:`_root_locator` attribute. To
+        instantiation or by defining a `_root_locator` attribute. To
         reduce the chances of hitting
-        :py:class:`~selenium.common.exceptions.StaleElementReferenceException` or similar
-        you should use :py:attr:`_root_locator`, as this is looked up every time the
-        :py:attr:`root` property is accessed.
+        `~selenium.common.exceptions.StaleElementReferenceException` or similar
+        you should use `_root_locator`, as this is looked up every time the
+        `root` property is accessed.
         """
         if self._root is None and self._root_locator is not None:
             return self.page.find_element(
@@ -75,12 +75,12 @@ class Region(WebView):
     def find_element(self, strategy, locator):
         """Finds an element on the page.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By`.
+        :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
         :param locator: Location of target element.
         :type strategy: str
         :type locator: str
         :return: An element.
-        :rytpe: :py:class:`~selenium.webdriver.remote.webelement.WebElement`
+        :rytpe: `~selenium.webdriver.remote.webelement.WebElement`
 
         """
         return self.driver_adapter.find_element(strategy, locator, root=self.root)
@@ -88,11 +88,11 @@ class Region(WebView):
     def find_elements(self, strategy, locator):
         """Finds elements on the page.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By`.
+        :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
         :param locator: Location of target elements.
         :type strategy: str
         :type locator: str
-        :return: List of :py:class:`~selenium.webdriver.remote.webelement.WebElement`
+        :return: List of `~selenium.webdriver.remote.webelement.WebElement`
         :rtype: list
 
         """
@@ -101,7 +101,7 @@ class Region(WebView):
     def is_element_present(self, strategy, locator):
         """Checks whether an element is present.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By`.
+        :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
         :param locator: Location of target element.
         :type strategy: str
         :type locator: str
@@ -114,7 +114,7 @@ class Region(WebView):
     def is_element_displayed(self, strategy, locator):
         """Checks whether an element is displayed.
 
-        :param strategy: Location strategy to use. See :py:class:`~selenium.webdriver.common.by.By`.
+        :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
         :param locator: Location of target element.
         :type strategy: str
         :type locator: str
@@ -132,7 +132,7 @@ class Region(WebView):
 
         You may need to initialise your page region before it's ready for you
         to interact with it. If this is the case, you can override
-        :py:attr:`loaded` to return ``True`` when the region has finished
+        `loaded` to return ``True`` when the region has finished
         loading.
 
         :return: ``True`` if page is loaded, else ``False``.

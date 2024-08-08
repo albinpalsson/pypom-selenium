@@ -22,7 +22,7 @@ class Selenium:
 
     def open(self, url):
         """Open the page.
-        Navigates to :py:attr:`url`
+        Navigates to `url`
         """
         self.driver.get(url)
 
@@ -30,13 +30,13 @@ class Selenium:
         """Finds an element on the page.
 
         :param strategy: Location strategy to use. See
-        :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        `~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target element.
         :param root: (optional) root node.
         :type strategy: str
         :type locator: str
-        :type root: str :py:class:`~selenium.webdriver.remote.webelement.WebElement` object or None.
-        :return: :py:class:`~selenium.webdriver.remote.webelement.WebElement` object.
+        :type root: str `~selenium.webdriver.remote.webelement.WebElement` object or None.
+        :return: `~selenium.webdriver.remote.webelement.WebElement` object.
         :rtype: selenium.webdriver.remote.webelement.WebElement
 
         """
@@ -48,13 +48,13 @@ class Selenium:
         """Finds elements on the page.
 
         :param strategy: Location strategy to use. See
-        :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        `~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target elements.
         :param root: (optional) root node.
         :type strategy: str
         :type locator: str
-        :type root: str :py:class:`~selenium.webdriver.remote.webelement.WebElement` object or None.
-        :return: List of :py:class:`~selenium.webdriver.remote.webelement.WebElement` objects.
+        :type root: str `~selenium.webdriver.remote.webelement.WebElement` object or None.
+        :return: List of `~selenium.webdriver.remote.webelement.WebElement` objects.
         :rtype: list
 
         """
@@ -66,12 +66,12 @@ class Selenium:
         """Checks whether an element is present.
 
         :param strategy: Location strategy to use. See
-        :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        `~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target element.
         :param root: (optional) root node.
         :type strategy: str
         :type locator: str
-        :type root: str :py:class:`~selenium.webdriver.remote.webelement.WebElement` object or None.
+        :type root: str `~selenium.webdriver.remote.webelement.WebElement` object or None.
         :return: ``True`` if element is present, else ``False``.
         :rtype: bool
 
@@ -85,12 +85,12 @@ class Selenium:
         """Checks whether an element is displayed.
 
         :param strategy: Location strategy to use. See
-        :py:class:`~selenium.webdriver.common.by.By` for valid values.
+        `~selenium.webdriver.common.by.By` for valid values.
         :param locator: Location of target element.
         :param root: (optional) root node.
         :type strategy: str
         :type locator: str
-        :type root: str :py:class:`~selenium.webdriver.remote.webelement.WebElement` object or None.
+        :type root: str `~selenium.webdriver.remote.webelement.WebElement` object or None.
         :return: ``True`` if element is displayed, else ``False``.
         :rtype: bool
 

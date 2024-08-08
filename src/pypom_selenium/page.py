@@ -24,8 +24,8 @@ class Page(WebView):
     :param driver: A driver.
     :param base_url: (optional) Base URL.
     :param timeout: (optional) Timeout used for explicit waits. Defaults to ``10``.
-    :param url_kwargs: (optional) Keyword arguments used when generating the :py:attr:`seed_url`.
-    :type driver: :py:class:`~selenium.webdriver.remote.webdriver.WebDriver`
+    :param url_kwargs: (optional) Keyword arguments used when generating the `seed_url`.
+    :type driver: `~selenium.webdriver.remote.webdriver.WebDriver`
     :type base_url: str
     :type timeout: int
 
@@ -48,7 +48,7 @@ class Page(WebView):
 
     This string is formatted and can contain names of keyword arguments passed
     during construction of the page object. The template should either assume
-    that its result will be appended to the value of :py:attr:`base_url`, or
+    that its result will be appended to the value of `base_url`, or
     should yield an absolute URL.
 
     Examples::
@@ -68,8 +68,8 @@ class Page(WebView):
     def seed_url(self):
         """A URL that can be used to open the page.
 
-        The URL is formatted from :py:attr:`URL_TEMPLATE`, which is then
-        appended to :py:attr:`base_url` unless the template results in an
+        The URL is formatted from `URL_TEMPLATE`, which is then
+        appended to `base_url` unless the template results in an
         absolute URL.
 
         :return: URL that can be used to open the page.
@@ -101,10 +101,10 @@ class Page(WebView):
     def open(self):
         """Open the page.
 
-        Navigates to :py:attr:`seed_url` and calls :py:func:`wait_for_page_to_load`.
+        Navigates to `seed_url` and calls `wait_for_page_to_load`.
 
         :return: The current page object.
-        :rtype: :py:class:`Page`
+        :rtype: `Page`
         :raises: UsageError
 
         """
@@ -125,7 +125,7 @@ class Page(WebView):
 
         By default the driver will try to wait for any page loads to be
         complete, however it's not uncommon for it to return early. To address
-        this you can override :py:attr:`loaded` to return ``True`` when the
+        this you can override `loaded` to return ``True`` when the
         page has finished loading.
 
         :return: ``True`` if page is loaded, else ``False``.
