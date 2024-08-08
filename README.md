@@ -297,7 +297,7 @@ the `header` property, and be able to check if it's displayed.
 ```
 
 #### Waiting for regions to load
-The `~pypom.region.Region.loaded` property function can be overridden and customised for your project's needs by returning `True` when the region has loaded to ensure it's ready for interaction. This property is polled by :py:attr:`~pypom.region.Region.wait_for_region_to_load`, which is called whenever a region is instantiated, and can be called directly by functions that a region to reload.
+The `~pypom.region.Region.loaded` property function can be overridden and customised for your project's needs by returning `True` when the region has loaded to ensure it's ready for interaction. This property is polled by `~pypom.region.Region.wait_for_region_to_load`, which is called whenever a region is instantiated, and can be called directly by functions that a region to reload.
 
 The following example waits for an element within a page region to be displayed
 ```py
