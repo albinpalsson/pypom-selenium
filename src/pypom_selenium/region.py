@@ -2,7 +2,9 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from pypom_selenium.page import Page
+from typing import List, Optional, Tuple
+from selenium.webdriver.remote.webelement import WebElement
+from .page import Page
 from .view import WebView
 
 
@@ -42,16 +44,16 @@ class Region(WebView):
 
     """
 
-    _root_locator = None
+    _root_locator: Optional[Tuple[str, str]] = None
 
-    def __init__(self, page: Page, root=None):
+    def __init__(self, page: Page, root: Optional[WebElement] = None):
         super().__init__(page.driver, page.timeout)
         self._root = root
         self.page = page
         self.wait_for_region_to_load()
 
     @property
-    def root(self):
+    def root(self) -> Optional[WebElement]:
         """Root element for the page region.
 
         Page regions should define a root element either by passing this on
@@ -67,12 +69,12 @@ class Region(WebView):
             )
         return self._root
 
-    def wait_for_region_to_load(self):
+    def wait_for_region_to_load(self) -> "Region":
         """Wait for the page region to load."""
         self.wait.until(lambda _: self.loaded)
         return self
 
-    def find_element(self, strategy, locator):
+    def find_element(self, strategy: str, locator: str) -> WebElement:
         """Finds an element on the page.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
@@ -85,7 +87,7 @@ class Region(WebView):
         """
         return self.driver_adapter.find_element(strategy, locator, root=self.root)
 
-    def find_elements(self, strategy, locator):
+    def find_elements(self, strategy: str, locator: str) -> List[WebElement]:
         """Finds elements on the page.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
@@ -98,7 +100,7 @@ class Region(WebView):
         """
         return self.driver_adapter.find_elements(strategy, locator, root=self.root)
 
-    def is_element_present(self, strategy, locator):
+    def is_element_present(self, strategy: str, locator: str) -> bool:
         """Checks whether an element is present.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
@@ -111,7 +113,7 @@ class Region(WebView):
         """
         return self.driver_adapter.is_element_present(strategy, locator, root=self.root)
 
-    def is_element_displayed(self, strategy, locator):
+    def is_element_displayed(self, strategy: str, locator: str) -> bool:
         """Checks whether an element is displayed.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
@@ -127,7 +129,7 @@ class Region(WebView):
         )
 
     @property
-    def loaded(self):
+    def loaded(self) -> bool:
         """Loaded state of the page region.
 
         You may need to initialise your page region before it's ready for you

@@ -3,14 +3,16 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import collections.abc
+from typing import Any, Iterable, Optional
 import urllib.parse as urlparse
 from urllib.parse import urlencode
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from .exception import UsageError
 from .view import WebView
 
 
-def iterable(arg):
+def iterable(arg: Any) -> Iterable[Any]:
     if isinstance(arg, collections.abc.Iterable) and not isinstance(arg, str):
         return arg
     return [arg]
@@ -43,7 +45,7 @@ class Page(WebView):
 
     """
 
-    URL_TEMPLATE = None
+    URL_TEMPLATE: Optional[str] = None
     """Template string representing a URL that can be used to open the page.
 
     This string is formatted and can contain names of keyword arguments passed
@@ -59,13 +61,19 @@ class Page(WebView):
 
     """
 
-    def __init__(self, driver, base_url=None, timeout=10, **url_kwargs):
+    def __init__(
+        self,
+        driver: WebDriver,
+        base_url: Optional[str] = None,
+        timeout: float = 10,
+        **url_kwargs: Any,
+    ):
         super().__init__(driver, timeout)
-        self.base_url = base_url
+        self.base_url = base_url or ""
         self.url_kwargs = url_kwargs
 
     @property
-    def seed_url(self):
+    def seed_url(self) -> Optional[str]:
         """A URL that can be used to open the page.
 
         The URL is formatted from `URL_TEMPLATE`, which is then
@@ -98,7 +106,7 @@ class Page(WebView):
         url_parts[4] = urlencode(query)
         return urlparse.urlunparse(url_parts)
 
-    def open(self):
+    def open(self) -> "Page":
         """Open the page.
 
         Navigates to `seed_url` and calls `wait_for_page_to_load`.
@@ -114,13 +122,13 @@ class Page(WebView):
             return self
         raise UsageError("Set a base URL or URL_TEMPLATE to open this page.")
 
-    def wait_for_page_to_load(self):
+    def wait_for_page_to_load(self) -> "Page":
         """Wait for the page to load."""
         self.wait.until(lambda _: self.loaded)
         return self
 
     @property
-    def loaded(self):
+    def loaded(self) -> bool:
         """Loaded state of the page.
 
         By default the driver will try to wait for any page loads to be

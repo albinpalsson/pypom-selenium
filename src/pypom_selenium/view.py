@@ -2,20 +2,23 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+from typing import List
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 from pypom_selenium.selenium_driver import Selenium
 
 
 class WebView:
-    def __init__(self, driver, timeout):
+    def __init__(self, driver: WebDriver, timeout: float):
         self.driver = driver
         self.driver_adapter = Selenium(driver)
         self.timeout = timeout
         self.wait = self.driver_adapter.wait_factory(self.timeout)
 
-    def find_element(self, strategy, locator):
+    def find_element(self, strategy: str, locator: str) -> WebElement:
         return self.driver_adapter.find_element(strategy, locator)
 
-    def find_elements(self, strategy, locator):
+    def find_elements(self, strategy: str, locator: str) -> List[WebElement]:
         """Finds elements on the page.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
@@ -28,7 +31,7 @@ class WebView:
         """
         return self.driver_adapter.find_elements(strategy, locator)
 
-    def is_element_present(self, strategy, locator):
+    def is_element_present(self, strategy: str, locator: str) -> bool:
         """Checks whether an element is present.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.
@@ -41,7 +44,7 @@ class WebView:
         """
         return self.driver_adapter.is_element_present(strategy, locator)
 
-    def is_element_displayed(self, strategy, locator):
+    def is_element_displayed(self, strategy: str, locator: str) -> bool:
         """Checks whether an element is displayed.
 
         :param strategy: Location strategy to use. See `~selenium.webdriver.common.by.By`.

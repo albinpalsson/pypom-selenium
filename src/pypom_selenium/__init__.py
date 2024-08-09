@@ -1,3 +1,3 @@
-import selenium
-from .page import Page
-from .region import Region
+# pylint: disable=useless-import-alias
+from .page import Page as Page
+from .region import Region as Region

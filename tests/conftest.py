@@ -11,23 +11,23 @@ from pypom_selenium import Page
 
 
 @pytest.fixture
-def base_url():
+def base_url() -> str:
     return "https://www.mozilla.org/"
 
 
 @pytest.fixture
-def element(driver):
+def element(driver: Mock) -> Mock:
     element = Mock()
     driver.find_element.return_value = element
     return element
 
 
 @pytest.fixture
-def page(driver, base_url):
+def page(driver: Mock, base_url: str) -> Page:
     return Page(driver, base_url)
 
 
 @pytest.fixture
-def driver():
+def driver() -> Mock:
     """All drivers"""
     return Mock()

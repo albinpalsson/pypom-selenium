@@ -3,16 +3,19 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
+from typing import List, Optional
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.common.exceptions import NoSuchElementException
 
 from selenium.webdriver.support.ui import WebDriverWait
 
 
 class Selenium:
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    def wait_factory(self, timeout):
+    def wait_factory(self, timeout: float) -> WebDriverWait[WebDriver]:
         """Returns a WebDriverWait like property for a given timeout.
 
         :param timeout: Timeout used by WebDriverWait calls
@@ -20,13 +23,15 @@ class Selenium:
         """
         return WebDriverWait(self.driver, timeout)
 
-    def open(self, url):
+    def open(self, url: str) -> None:
         """Open the page.
         Navigates to `url`
         """
         self.driver.get(url)
 
-    def find_element(self, strategy, locator, root=None):
+    def find_element(
+        self, strategy: str, locator: str, root: Optional[WebElement] = None
+    ) -> WebElement:
         """Finds an element on the page.
 
         :param strategy: Location strategy to use. See
@@ -44,7 +49,9 @@ class Selenium:
             return root.find_element(strategy, locator)
         return self.driver.find_element(strategy, locator)
 
-    def find_elements(self, strategy, locator, root=None):
+    def find_elements(
+        self, strategy: str, locator: str, root: Optional[WebElement] = None
+    ) -> List[WebElement]:
         """Finds elements on the page.
 
         :param strategy: Location strategy to use. See
@@ -62,7 +69,9 @@ class Selenium:
             return root.find_elements(strategy, locator)
         return self.driver.find_elements(strategy, locator)
 
-    def is_element_present(self, strategy, locator, root=None):
+    def is_element_present(
+        self, strategy: str, locator: str, root: Optional[WebElement] = None
+    ) -> bool:
         """Checks whether an element is present.
 
         :param strategy: Location strategy to use. See
@@ -77,11 +86,14 @@ class Selenium:
 
         """
         try:
-            return self.find_element(strategy, locator, root=root)
+            self.find_element(strategy, locator, root=root)
+            return True
         except NoSuchElementException:
             return False
 
-    def is_element_displayed(self, strategy, locator, root=None):
+    def is_element_displayed(
+        self, strategy: str, locator: str, root: Optional[WebElement] = None
+    ) -> bool:
         """Checks whether an element is displayed.
 
         :param strategy: Location strategy to use. See

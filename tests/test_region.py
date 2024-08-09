@@ -7,26 +7,28 @@ from mock import Mock
 from selenium.common.exceptions import TimeoutException
 
 from pypom_selenium import Region
+from pypom_selenium.page import Page
 
 
 class TestWaitForRegion:
-    def test_wait_for_region(self, page):
+    def test_wait_for_region(self, page: Page) -> None:
         assert isinstance(Region(page).wait_for_region_to_load(), Region)
 
-    def test_wait_for_region_timeout(self, page):
+    def test_wait_for_region_timeout(self, page: Page) -> None:
         class MyRegion(Region):
-            def wait_for_region_to_load(self):
+            def wait_for_region_to_load(self) -> "MyRegion":
                 self.wait.until(lambda s: False)
+                return self
 
         page.timeout = 0
 
         with pytest.raises(TimeoutException):
             MyRegion(page)
 
-    def test_wait_for_region_timeout_loaded(self, page):
+    def test_wait_for_region_timeout_loaded(self, page: Page) -> None:
         class MyRegion(Region):
             @property
-            def loaded(self):
+            def loaded(self) -> bool:
                 return False
 
         page.timeout = 0
@@ -35,10 +37,10 @@ class TestWaitForRegion:
             MyRegion(page)
 
 
-def test_no_root(page):
+def test_no_root(page: Page) -> None:
     assert Region(page).root is None
 
 
-def test_root(page):
+def test_root(page: Page) -> None:
     element = Mock()
     assert Region(page, root=element).root == element
