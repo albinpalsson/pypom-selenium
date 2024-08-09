@@ -31,7 +31,7 @@ class Page(WebView):
 
     Usage::
 
-      from pypom import Page
+      from pypom_selenium import Page
       from selenium.webdriver import Firefox
 
       class Mozilla(Page):
@@ -133,7 +133,7 @@ class Page(WebView):
 
         Usage::
 
-          from pypom import Page
+          from pypom_selenium import Page
           from selenium.webdriver.common.by import By
 
           class Mozilla(Page):

@@ -52,7 +52,7 @@ Page objects are representations of web pages. They provide functions to allow s
 The following very simple example instantiates a page object representing the
 landing page of the Mozilla website
 ```py
-  from pypom import Page
+  from pypom_selenium import Page
 
   class Mozilla(Page):
       pass
@@ -68,7 +68,7 @@ A base URL can be passed to a page object on instantiation. If no URL template
 is provided, then calling `~pypom.page.Page.open` will open this base
 URL
 ```py
-  from pypom import Page
+  from pypom_selenium import Page
 
   class Mozilla(Page):
       pass
@@ -81,7 +81,7 @@ URL
 By setting a value for `~pypom.page.Page.URL_TEMPLATE`, pages can specify either an absolute URL or one that is relative to the base URL (when provided). In the following example, the URL https://www.mozilla.org/about/
 will be opened
 ```py
-  from pypom import Page
+  from pypom_selenium import Page
 
   class Mozilla(Page):
       URL_TEMPLATE = '/about/'
@@ -92,7 +92,7 @@ will be opened
 
 As this is a template, any additional keyword arguments passed when instantiating the page object will attempt to resolve any placeholders. In the following example, the URL https://www.mozilla.org/de/about/ will be opened
 ```py
-  from pypom import Page
+  from pypom_selenium import Page
 
   class Mozilla(Page):
       URL_TEMPLATE = '/{locale}/about/'
@@ -104,7 +104,7 @@ As this is a template, any additional keyword arguments passed when instantiatin
 #### URL parameters
 Any keyword arguments provided that are not used as placeholders in the URL template are added as query string parameters. In the following example, the URL https://developer.mozilla.org/fr/search?q=bold&topic=css will be opened
 ```py
-  from pypom import Page
+  from pypom_selenium import Page
 
   class Search(Page):
       URL_TEMPLATE = '/{locale}/search'
@@ -121,7 +121,7 @@ The following example waits for the seed URL to be in the current URL. You can
 use this so long as the URL is not rewritten or redirected by your
 application
 ```py
-  from pypom import Page
+  from pypom_selenium import Page
 
   class Mozilla(Page):
 
@@ -181,7 +181,7 @@ The following example uses Selenium to locate all results on a page and return a
 </html>
 ```
 ```py
-from pypom import Page, Region
+from pypom_selenium import Page, Region
 from selenium.webdriver.common.by import By
 
 
@@ -241,7 +241,7 @@ Regions can be nested inside other regions (i.e. a menu region with multiple ent
 As a region requires a page object to be passed you need to pass `self.page` when instantiating nested regions:
 
 ```py
-from pypom import Region, Page
+from pypom_selenium import Region, Page
 from selenium.webdriver.common.by import By
 
 
@@ -280,7 +280,7 @@ Pages with common characteristics can use regions to avoid duplication. Examples
 In the following example, any page objects that extend `Base` will inherit
 the `header` property, and be able to check if it's displayed.
 ```py
-  from pypom import Page, Region
+  from pypom_selenium import Page, Region
   from selenium.webdriver.common.by import By
 
   class Base(Page):
@@ -301,7 +301,7 @@ The `~pypom.region.Region.loaded` property function can be overridden and custom
 
 The following example waits for an element within a page region to be displayed
 ```py
-  from pypom import Region
+  from pypom_selenium import Region
 
   class Header(Region):
 

@@ -18,7 +18,7 @@ class Region(WebView):
 
     Usage::
 
-      from pypom import Page, Region
+      from pypom_selenium import Page, Region
       from selenium.webdriver import Firefox
       from selenium.webdriver.common.by import By
 
@@ -140,7 +140,7 @@ class Region(WebView):
 
         Usage::
 
-          from pypom import Page, Region
+          from pypom_selenium import Page, Region
           from selenium.webdriver.common.by import By
 
           class Mozilla(Page):
