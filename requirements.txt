@@ -3,7 +3,6 @@ mock==5.1.0
 mypy==1.11.1
 pylint==3.2.6
 pytest==8.3.2
-pytest-pylint==0.21.0
 selenium==4.23.1
 tox==4.17.0
 types-mock==5.1.0.20240425

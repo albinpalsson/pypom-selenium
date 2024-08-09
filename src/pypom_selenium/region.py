@@ -63,8 +63,8 @@ class Region(WebView):
         """
         if self._root is None and self._root_locator is not None:
             return self.page.find_element(
-                *self._root_locator
-            )  # pylint: disable=not-an-iterable
+                *self._root_locator  # pylint: disable=not-an-iterable
+            )
         return self._root
 
     def wait_for_region_to_load(self):
