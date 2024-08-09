@@ -7,6 +7,10 @@ authors = [
 description = "python page object model for selenium"
 readme = "README.md"
 requires-python = ">=3.8"
+dependencies = [
+  "selenium",
+  "typing_extensions",
+]
 keywords = ["pypom", "page", "object", "model", "selenium"]
 classifiers = [
     "Programming Language :: Python",
