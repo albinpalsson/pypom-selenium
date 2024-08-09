@@ -7,6 +7,7 @@ import random
 import pytest
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webdriver import WebDriver
+from typing_extensions import Self
 
 from pypom_selenium import Page
 from pypom_selenium.exception import UsageError
@@ -168,7 +169,7 @@ def test_open_seed_url_none(driver: WebDriver) -> None:
 
 def test_open_timeout(base_url: str, driver: WebDriver) -> None:
     class MyPage(Page):
-        def wait_for_page_to_load(self) -> "MyPage":
+        def wait_for_page_to_load(self) -> Self:
             self.wait.until(lambda s: False)
             return self
 
@@ -196,7 +197,7 @@ def test_wait_for_page(page: Page) -> None:
 
 def test_wait_for_page_timeout(base_url: str, driver: WebDriver) -> None:
     class MyPage(Page):
-        def wait_for_page_to_load(self) -> "MyPage":
+        def wait_for_page_to_load(self) -> Self:
             self.wait.until(lambda s: False)
             return self
 

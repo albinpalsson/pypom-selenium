@@ -7,6 +7,7 @@ from typing import Any, Iterable, Optional
 import urllib.parse as urlparse
 from urllib.parse import urlencode
 from selenium.webdriver.remote.webdriver import WebDriver
+from typing_extensions import Self
 
 from .exception import UsageError
 from .view import WebView
@@ -106,7 +107,7 @@ class Page(WebView):
         url_parts[4] = urlencode(query)
         return urlparse.urlunparse(url_parts)
 
-    def open(self) -> "Page":
+    def open(self) -> Self:
         """Open the page.
 
         Navigates to `seed_url` and calls `wait_for_page_to_load`.
@@ -122,7 +123,7 @@ class Page(WebView):
             return self
         raise UsageError("Set a base URL or URL_TEMPLATE to open this page.")
 
-    def wait_for_page_to_load(self) -> "Page":
+    def wait_for_page_to_load(self) -> Self:
         """Wait for the page to load."""
         self.wait.until(lambda _: self.loaded)
         return self

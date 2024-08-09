@@ -5,6 +5,7 @@
 import pytest
 from mock import Mock
 from selenium.common.exceptions import TimeoutException
+from typing_extensions import Self
 
 from pypom_selenium import Region
 from pypom_selenium.page import Page
@@ -16,7 +17,7 @@ class TestWaitForRegion:
 
     def test_wait_for_region_timeout(self, page: Page) -> None:
         class MyRegion(Region):
-            def wait_for_region_to_load(self) -> "MyRegion":
+            def wait_for_region_to_load(self) -> Self:
                 self.wait.until(lambda s: False)
                 return self
 

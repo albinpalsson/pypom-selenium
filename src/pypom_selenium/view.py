@@ -5,7 +5,7 @@
 from typing import List
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
-from pypom_selenium.selenium_driver import Selenium
+from .selenium_driver import Selenium
 
 
 class WebView:

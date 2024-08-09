@@ -2,7 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from typing import List, Optional, Tuple
+from typing_extensions import List, Optional, Tuple
+from typing_extensions import Self
 from selenium.webdriver.remote.webelement import WebElement
 from .page import Page
 from .view import WebView
@@ -69,7 +70,7 @@ class Region(WebView):
             )
         return self._root
 
-    def wait_for_region_to_load(self) -> "Region":
+    def wait_for_region_to_load(self) -> Self:
         """Wait for the page region to load."""
         self.wait.until(lambda _: self.loaded)
         return self
