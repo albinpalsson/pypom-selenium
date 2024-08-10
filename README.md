@@ -3,8 +3,8 @@
 ![PyPI - License](https://img.shields.io/pypi/l/pypom-selenium)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pypom-selenium)](https://pypi.python.org/pypi/pypom-selenium)
 
-# Selenium PyPOM
-Selenium PyPOM is a Python Page Object Model library for Selenium. It presents a thin interface for implementing the page object model design pattern. The project is built based on [mozilla/PyPOM](https://github.com/mozilla/PyPOM), all credit goes to the authors.
+# PyPOM Selenium
+PyPOM Selenium is a Python Page Object Model library for Selenium. It presents a thin interface for implementing the page object model design pattern. The project is built based on [mozilla/PyPOM](https://github.com/mozilla/PyPOM), all credit goes to the authors.
 
 This project is licensed under the Mozilla Public License version 2.0.
 
@@ -29,8 +29,8 @@ This project is licensed under the Mozilla Public License version 2.0.
 
 
 ## Installation
-Selenium PyPOM requires Python >= 3.8  
-To install PyPOM using [pip](https://pip.pypa.io/)
+PyPOM Selenium requires Python >= 3.8  
+To install PyPOM Selenium using [pip](https://pip.pypa.io/)
 ```sh
 pip install pypom-selenium
 ```
@@ -38,7 +38,7 @@ pip install pypom-selenium
 ## User Guide
 
 ### Drivers
-PyPOM requires a driver object to be instantiated, and supports multiple driver types. The examples in this guide will assume that you have a driver instance.
+PyPOM Selenium requires a driver object to be instantiated, and supports multiple driver types. The examples in this guide will assume that you have a driver instance.
 
 To instantiate a Selenium driver you will need a `~selenium.webdriver.remote.webdriver.WebDriver` object
 ```py
@@ -47,10 +47,9 @@ To instantiate a Selenium driver you will need a `~selenium.webdriver.remote.web
 ```
 
 ### Pages
-Page objects are representations of web pages. They provide functions to allow simulating user actions, and providing properties that return state from the page. The `~pypom.page.Page` class provided by PyPOM provides a simple implementation that can be sub-classed to apply to your project.
+Page objects are representations of web pages. They provide functions to allow simulating user actions, and providing properties that return state from the page. The `~pypom_selenium.page.Page` class provided by PyPOM provides a simple implementation that can be sub-classed to apply to your project.
 
-The following very simple example instantiates a page object representing the
-landing page of the Mozilla website
+The following very simple example instantiates a page object representing the landing page of the Mozilla website
 ```py
   from pypom_selenium import Page
 
@@ -59,14 +58,10 @@ landing page of the Mozilla website
 
   page = Mozilla(driver)
 ```
-If a page has a seed URL then you can call the `~pypom.page.Page.open`
-function to open the page in the browser. There are a number of ways to specify
-a seed URL.
+If a page has a seed URL then you can call the `~pypom_selenium.page.Page.open` function to open the page in the browser. There are a number of ways to specify a seed URL.
 
 #### Base URL
-A base URL can be passed to a page object on instantiation. If no URL template
-is provided, then calling `~pypom.page.Page.open` will open this base
-URL
+A base URL can be passed to a page object on instantiation. If no URL template is provided, then calling `~pypom_selenium.page.Page.open` will open this base URL
 ```py
   from pypom_selenium import Page
 
@@ -78,8 +73,7 @@ URL
 ```
 
 #### URL templates
-By setting a value for `~pypom.page.Page.URL_TEMPLATE`, pages can specify either an absolute URL or one that is relative to the base URL (when provided). In the following example, the URL https://www.mozilla.org/about/
-will be opened
+By setting a value for `~pypom_selenium.page.Page.URL_TEMPLATE`, pages can specify either an absolute URL or one that is relative to the base URL (when provided). In the following example, the URL https://www.mozilla.org/about/ will be opened
 ```py
   from pypom_selenium import Page
 
@@ -114,12 +108,9 @@ Any keyword arguments provided that are not used as placeholders in the URL temp
 ```
 
 #### Waiting for pages to load
-Whenever a driver detects that a page is loading, it does its best to block until it's complete. Unfortunately, as the driver does not know your application, it's quite common for it to return earlier than a user would consider the page to be ready. For this reason, the `~pypom.page.Page.loaded` property can be overridden and customised
-for your project's needs by returning `True` when the page has loaded. This property is polled by `~pypom.page.Page.wait_for_page_to_load`, which is called by `~pypom.page.Page.open` after loading the seed URL, and can be called directly by functions that cause a page to load.
+Whenever a driver detects that a page is loading, it does its best to block until it's complete. Unfortunately, as the driver does not know your application, it's quite common for it to return earlier than a user would consider the page to be ready. For this reason, the `~pypom_selenium.page.Page.loaded` property can be overridden and customised for your project's needs by returning `True` when the page has loaded. This property is polled by `~pypom_selenium.page.Page.wait_for_page_to_load`, which is called by `~pypom_selenium.page.Page.open` after loading the seed URL, and can be called directly by functions that cause a page to load.
 
-The following example waits for the seed URL to be in the current URL. You can
-use this so long as the URL is not rewritten or redirected by your
-application
+The following example waits for the seed URL to be in the current URL. You can use this so long as the URL is not rewritten or redirected by your application
 ```py
   from pypom_selenium import Page
 
@@ -130,9 +121,7 @@ application
           return self.seed_url in self.selenium.current_url
 ```
 
-Other things to wait for might include when elements are displayed or enabled,
-or when an element has a particular class. This will be very dependent on your
-application.
+Other things to wait for might include when elements are displayed or enabled, or when an element has a particular class. This will be very dependent on your application.
 
 ### Regions
 Region objects represent one or more elements of a web page that are repeated multiple times on a page, or shared between multiple web pages. They prevent duplication, and can improve the readability and maintainability of your page objects.
@@ -140,16 +129,14 @@ Region objects represent one or more elements of a web page that are repeated mu
 #### Root elements
 It's important for page regions to have a root element. This is the element that any child elements will be located within. This means that page region locators do not need to be unique on the page, only unique within the context of the root element.
 
-If your page region contains a `~pypom.region.Region._root_locator` attribute, this will be used to locate the root element every time an instance of the region is created. This is recommended for most page regions as it avoids issues when the root element becomes stale.
+If your page region contains a `~pypom_selenium.region.Region._root_locator` attribute, this will be used to locate the root element every time an instance of the region is created. This is recommended for most page regions as it avoids issues when the root element becomes stale.
 
 Alternatively, you can locate the root element yourself and pass it to the region on construction. This is useful when creating regions that are repeated on a single page.
 
-The root element can later be accessed via the `~pypom.region.Region.root` attribute on the region, which may be necessary if you need to interact with it.
+The root element can later be accessed via the `~pypom_selenium.region.Region.root` attribute on the region, which may be necessary if you need to interact with it.
 
 #### Repeating regions
-Page regions are useful when you have multiple items on a page that share the
-same characteristics, such as a list of search results. By creating a page
-region, you can interact with any of these items in a common way:
+Page regions are useful when you have multiple items on a page that share the same characteristics, such as a list of search results. By creating a page region, you can interact with any of these items in a common way:
 
 The following example uses Selenium to locate all results on a page and return a list of `Result` regions. This can be used to determine the number of results, and each result can be accessed from this list for further state or interactions.
 ```html
@@ -297,7 +284,7 @@ the `header` property, and be able to check if it's displayed.
 ```
 
 #### Waiting for regions to load
-The `~pypom.region.Region.loaded` property function can be overridden and customised for your project's needs by returning `True` when the region has loaded to ensure it's ready for interaction. This property is polled by `~pypom.region.Region.wait_for_region_to_load`, which is called whenever a region is instantiated, and can be called directly by functions that a region to reload.
+The `~pypom_selenium.region.Region.loaded` property function can be overridden and customised for your project's needs by returning `True` when the region has loaded to ensure it's ready for interaction. This property is polled by `~pypom_selenium.region.Region.wait_for_region_to_load`, which is called whenever a region is instantiated, and can be called directly by functions that a region to reload.
 
 The following example waits for an element within a page region to be displayed
 ```py
