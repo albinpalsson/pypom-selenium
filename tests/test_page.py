@@ -77,7 +77,8 @@ def test_seed_url_absolute_keywords_tokens_and_params(
 
 def test_seed_url_empty(driver: WebDriver) -> None:
     page = Page(driver)
-    assert page.seed_url is None
+    with pytest.raises(UsageError):
+        page.seed_url
 
 
 def test_seed_url_keywords_tokens(base_url: str, driver: WebDriver) -> None:

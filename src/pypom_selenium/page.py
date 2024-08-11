@@ -74,7 +74,7 @@ class Page(WebView):
         self.url_kwargs = url_kwargs
 
     @property
-    def seed_url(self) -> Optional[str]:
+    def seed_url(self) -> str:
         """A URL that can be used to open the page.
 
         The URL is formatted from `URL_TEMPLATE`, which is then
@@ -92,7 +92,9 @@ class Page(WebView):
             )
 
         if not url:
-            return None
+            raise UsageError(
+                "Set a base URL or URL_TEMPLATE to be able to use the seed_url."
+            )
 
         url_parts = list(urlparse.urlparse(url))
         query = urlparse.parse_qsl(url_parts[4])
@@ -117,11 +119,9 @@ class Page(WebView):
         :raises: UsageError
 
         """
-        if self.seed_url:
-            self.driver_adapter.open(self.seed_url)
-            self.wait_for_page_to_load()
-            return self
-        raise UsageError("Set a base URL or URL_TEMPLATE to open this page.")
+        self.driver_adapter.open(self.seed_url)
+        self.wait_for_page_to_load()
+        return self
 
     def wait_for_page_to_load(self) -> Self:
         """Wait for the page to load."""
