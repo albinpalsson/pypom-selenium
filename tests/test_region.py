@@ -5,9 +5,11 @@
 import pytest
 from mock import Mock
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from typing_extensions import Self
 
 from pypom_selenium import Region
+from pypom_selenium.exception import UsageError
 from pypom_selenium.page import Page
 
 
@@ -39,9 +41,25 @@ class TestWaitForRegion:
 
 
 def test_no_root(page: Page) -> None:
-    assert Region(page).root is None
+    with pytest.raises(UsageError):
+        Region(page).root
 
 
 def test_root(page: Page) -> None:
     element = Mock()
     assert Region(page, root=element).root == element
+
+
+def test_root_locator(page: Page, element: Mock) -> None:
+    class MyRegion(Region):
+        _root_locator = (By.ID, "test")
+
+    assert MyRegion(page).root == element
+    page.driver.find_element.assert_called_once_with(By.ID, "test")  # type: ignore
+    page.driver.find_element.call_count == 1  # type: ignore
+
+    # If a root element is passed on Region instantiation, this root should be used
+    # instead of finding one with the _root_locator
+    element = Mock()
+    assert MyRegion(page, root=element).root == element
+    page.driver.find_element.call_count == 1  # type: ignore

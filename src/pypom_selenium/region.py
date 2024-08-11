@@ -5,6 +5,8 @@
 from typing_extensions import List, Optional, Tuple
 from typing_extensions import Self
 from selenium.webdriver.remote.webelement import WebElement
+
+from .exception import UsageError
 from .page import Page
 from .view import WebView
 
@@ -54,7 +56,7 @@ class Region(WebView):
         self.wait_for_region_to_load()
 
     @property
-    def root(self) -> Optional[WebElement]:
+    def root(self) -> WebElement:
         """Root element for the page region.
 
         Page regions should define a root element either by passing this on
@@ -64,11 +66,16 @@ class Region(WebView):
         you should use `_root_locator`, as this is looked up every time the
         `root` property is accessed.
         """
-        if self._root is None and self._root_locator is not None:
-            return self.page.find_element(
-                *self._root_locator  # pylint: disable=not-an-iterable
-            )
-        return self._root
+        if self._root is not None:
+            return self._root
+
+        if self._root_locator is not None:
+            strategy, locator = self._root_locator
+            return self.page.find_element(strategy, locator)
+
+        raise UsageError(
+            "Set a root element or define a _root_locator to be able to use the root property."
+        )
 
     def wait_for_region_to_load(self) -> Self:
         """Wait for the page region to load."""
