@@ -23,6 +23,8 @@ This project is licensed under the Mozilla Public License version 2.0.
         - [Nested regions](#nested-regions)
         - [Shared regions](#shared-regions)
         - [Waiting for regions to load](#waiting-for-regions-to-load)
+- [Development](#development)
+    - [Running tests](#running-tests)
 - [Release Notes](#release-notes)
     - [1.1.0](#110-2024-08-07)
     - [1.0.0](#100-2024-08-06)
