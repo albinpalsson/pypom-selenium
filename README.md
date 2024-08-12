@@ -23,6 +23,8 @@ This project is licensed under the Mozilla Public License version 2.0.
         - [Nested regions](#nested-regions)
         - [Shared regions](#shared-regions)
         - [Waiting for regions to load](#waiting-for-regions-to-load)
+    - [Type hints](#type-hints)
+        - [Narrowing the type of a Region class](#narrowing-the-type-of-a-region-class)
 - [Development](#development)
     - [Running tests](#running-tests)
 - [Release Notes](#release-notes)
@@ -300,6 +302,34 @@ The following example waits for an element within a page region to be displayed
 ```
 
 Other things to wait for might include when elements are displayed or enabled, or when an element has a particular class. This will be very dependent on your application.
+
+### Type hints
+#### Narrowing the type of a Region class
+Sometimes its useful to access the "parent" page from a region. The Region class is genericly
+typed to allow narrowing the type of the Page of which it is connected to.
+This allows language servers and linters to infer and restrict the exact Page type used
+with a Region class.  
+In the example below, note `class Form(Region["MyPage"]):`
+```py
+  from pypom_selenium import Region, Page
+  from selenium.webdriver.common.by import By
+
+  class MyPage(Page):
+      _body_locator = (By.TAG_NAME, "body")
+
+      @property
+      def text(self) -> str:
+          return self.find_element(*self._body_locator).text
+
+      class Form(Region["MyPage"]):
+          _button_locator = (By.TAG_NAME, "button")
+
+          def submit(self) -> None:
+              self.find_element(*self._button_locator).click()
+              # language servers and linters now knows the type of self.page.text
+              self.wait.until(lambda _: "Successfully submitted" in self.page.text)
+```
+
 
 ## Development
 ### Running Tests

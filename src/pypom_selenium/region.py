@@ -2,16 +2,18 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from typing_extensions import List, Optional, Tuple
-from typing_extensions import Self
+from typing import Generic, List, Optional, Tuple
+from typing_extensions import TypeVar, Self
 from selenium.webdriver.remote.webelement import WebElement
 
 from .exception import UsageError
 from .page import Page
 from .view import WebView
 
+T = TypeVar("T", default=Page, bound=Page)
 
-class Region(WebView):
+
+class Region(WebView, Generic[T]):
     """A page region object.
 
     Used as a base class for your project's page region objects.
@@ -49,7 +51,7 @@ class Region(WebView):
 
     _root_locator: Optional[Tuple[str, str]] = None
 
-    def __init__(self, page: Page, root: Optional[WebElement] = None):
+    def __init__(self, page: T, root: Optional[WebElement] = None):
         super().__init__(page.driver, page.timeout)
         self._root = root
         self.page = page
