@@ -28,6 +28,7 @@ This project is licensed under the Mozilla Public License version 2.0.
 - [Development](#development)
     - [Running tests](#running-tests)
 - [Release Notes](#release-notes)
+    - [2.0.0](#200-2024-08-15)
     - [1.1.0](#110-2024-08-07)
     - [1.0.0](#100-2024-08-06)
 
@@ -340,6 +341,13 @@ $ tox
 ```
 
 ## Release Notes
+### 2.0.0 (2024-08-15)
+- Type hint information is now distributed with the package.
+- Accessing Page.seed_url will now raise UsageError if no base URL or URL_TEMPLATE is set. Previously returned None.
+- Accessing Region.root will now raise UsageError if Region instance has not been instantiated with a root and there is no _root_locator defined.  
+  Previously returned None. This also applies to indirect access through Region.find_element[s] methods.
+- Distributed package now declares explicit dependencies to Selenium and typing_extenstions.
+
 ### 1.1.0 (2024-08-07)
 Add support for python 3.10.  
 The project now officially supports versions 3.8, 3.9, 3.11 and 3.12.
