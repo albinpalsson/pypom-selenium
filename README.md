@@ -34,7 +34,7 @@ This project is licensed under the Mozilla Public License version 2.0.
 
 
 ## Installation
-PyPOM Selenium requires Python >= 3.8  
+PyPOM Selenium requires Python >= 3.10  
 To install PyPOM Selenium using [pip](https://pip.pypa.io/)
 ```sh
 pip install pypom-selenium
@@ -341,6 +341,10 @@ $ tox
 ```
 
 ## Release Notes
+### 2.0.1 (2025-10-13)
+Officially support Python 3.14 and remove official support for Python 3.8.
+(No changes to the source code has been made)
+
 ### 2.0.0 (2024-08-15)
 - Type hint information is now distributed with the package.
 - Accessing Page.seed_url will now raise UsageError if no base URL or URL_TEMPLATE is set. Previously returned None.
